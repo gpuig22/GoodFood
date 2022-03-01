@@ -2,11 +2,15 @@ package com.multimediatgna.goodfood;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.multimediatgna.goodfood.ui.main.LoginFragment;
 
 public class Login extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,8 +18,11 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, LoginFragment.newInstance())
+                    .replace(R.id.myframelayout, LoginFragment.newInstance())
                     .commitNow();
         }
+
+
+
     }
 }
