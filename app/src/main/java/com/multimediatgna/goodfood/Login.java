@@ -3,13 +3,14 @@ package com.multimediatgna.goodfood;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.multimediatgna.goodfood.ui.main.LoginFragment;
 
 public class Login extends AppCompatActivity {
-
 
 
     @Override
