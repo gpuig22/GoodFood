@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GoodFood</string>
+    <string name="callNumber">tel:+34977222231</string>
 </resources>

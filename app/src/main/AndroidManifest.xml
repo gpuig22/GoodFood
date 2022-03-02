@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.multimediatgna.goodfood">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
-        android:name="android.permission.READ_PHONE_STATE"
-        />
-
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
 
     <application
