@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.multimediatgna.goodfood.Login;
 import com.multimediatgna.goodfood.R;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -34,6 +37,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     TextView mytextview;
     private Context mycontext;
     Button mybutton, mybutton2;
+    FloatingActionButton myfab;
 
 
     public static LoginFragment newInstance() {
@@ -62,6 +66,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mybutton.setOnClickListener(this);
         mybutton2 = root.findViewById(R.id.myphonecallbutton);
         mybutton2.setOnClickListener(this);
+        myfab = root.findViewById(R.id.myfab);
+        myfab.setOnClickListener(this);
 
         return root;
     }
@@ -139,6 +145,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 startActivity(myphoneCallIntent);
+                break;
+
+            case R.id.myfab:
+                    FirebaseAuth.getInstance().signOut();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
                 break;
 
         }
