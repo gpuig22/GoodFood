@@ -4,20 +4,14 @@
 package com.multimediatgna.goodfood;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.multimediatgna.goodfood.ui.main.LoginFragment;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class AuthActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     Button myloginbutton;
@@ -34,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         this.setTheme(R.style.Theme_GoodFood);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_auth);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }

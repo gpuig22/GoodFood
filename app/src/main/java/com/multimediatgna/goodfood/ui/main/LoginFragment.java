@@ -1,7 +1,5 @@
 package com.multimediatgna.goodfood.ui.main;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.multimediatgna.goodfood.MainActivity;
 import com.multimediatgna.goodfood.R;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
