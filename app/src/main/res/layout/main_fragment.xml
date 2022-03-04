@@ -11,85 +11,89 @@
         android:id="@+id/textView7"
         android:layout_width="100dp"
         android:layout_height="42dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_alternates_bold"
         android:text="USER:"
         android:textColor="#E91E63"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/myusername"
-        android:layout_width="343dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="171dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="48dp"
         android:ems="10"
         android:fontFamily="@font/montserrat_alternates_bold"
         android:inputType="textPersonName"
         android:text="Name"
         android:textColor="#3F51B5"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="176dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="196dp"
+        android:layout_width="155dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/montserrat_alternates_bold"
         android:text="PASSWORD:"
         android:textColor="#E91E63"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myusername" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/mypasswd"
-        android:layout_width="344dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="192dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:fontFamily="@font/montserrat_alternates_bold"
         android:inputType="textPersonName"
         android:text="Name"
         android:textColor="#3F51B5"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/myusername" />
+
+    <Button
+        android:id="@+id/myphonecallbutton"
+        android:layout_width="376dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:text="Phone call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
-        android:id="@+id/myphonecallbutton"
-        android:layout_width="341dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="60dp"
-        android:text="Phone call"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypasswd" />
-
-    <Button
         android:id="@+id/mysysteminfobutton"
-        android:layout_width="340dp"
-        android:layout_height="52dp"
+        android:layout_width="379dp"
+        android:layout_height="49dp"
         android:layout_marginTop="8dp"
         android:text="View system info"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myphonecallbutton" />
 
     <ScrollView
-        android:layout_width="340dp"
-        android:layout_height="282dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="381dp"
+        android:layout_height="294dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mysysteminfobutton">
 
@@ -102,14 +106,23 @@
                 android:id="@+id/mysysteminfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </LinearLayout>
     </ScrollView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/myfab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FB0909"
+        android:src="@drawable/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
