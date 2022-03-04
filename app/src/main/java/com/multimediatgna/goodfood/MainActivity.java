@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.setTheme(R.style.Theme_GoodFood);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (getSupportActionBar() != null) {
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myloginbutton.setOnClickListener(this);
         myname = findViewById(R.id.myname);
         mypassword = findViewById(R.id.mypassword);
+
     }
 
     @Override
