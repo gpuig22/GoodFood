@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">GoodFood</string>
     <string name="callNumber">tel:+34977222231</string>
+    <string name="paypal">Donate €</string>
+    <string name="item2">item 2</string>
+    <string name="item3">item 3</string>
+    <string name="subitem1">Subitem 1</string>
+    <string name="subitem2">Subitem 2</string>
 </resources>
