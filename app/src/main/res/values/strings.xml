@@ -6,4 +6,9 @@
     <string name="item3">item 3</string>
     <string name="subitem1">Subitem 1</string>
     <string name="subitem2">Subitem 2</string>
+    <string name="email_verification_sent">Check your email and click on the link inside</string>
+    <string name="email_verification_failure">Failure to send verification email. Contact support.</string>
+    <string name="registration_failure">Registration failure. Contact support</string>
+    <string name="email_not_verified">Account has not been verified. Check your email.</string>
+    <string name="account_not_found">"Account not found. Click on SIGN UP button and create a new account. "</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.multimediatgna.goodfood;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +48,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         myloginbutton.setOnClickListener(this);
         myname = findViewById(R.id.myname);
         mypassword = findViewById(R.id.mypassword);
-        mysignuptextview = findViewById(R.id.mysignuptextview);
+        mysignuptextview = findViewById(R.id.mysignupbutton);
         mysignuptextview.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
@@ -60,9 +59,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.myloginbutton:
-                Log.d("GoodFood", "onClick myloginbutton executed");
                 if (myname.getText().toString() != null && !myname.getText().toString().isEmpty() && mypassword.getText().toString() != null && !mypassword.getText().toString().isEmpty()) {
                     myIntent = new Intent(this, Login.class);
                     mAuth.signInWithEmailAndPassword(myname.getText().toString(), mypassword.getText().toString())
@@ -71,37 +68,47 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
-                                        myIntent.putExtra("myname", myname.getText().toString()); //Optional parameters
-                                        myIntent.putExtra("mypassword", mypassword.getText().toString()); //Optional parameters
-                                        startActivity(myIntent);
-
+                                        if (currentUser.isEmailVerified()) {
+                                            myIntent.putExtra("myname", myname.getText().toString()); //Optional parameters
+                                            myIntent.putExtra("mypassword", mypassword.getText().toString()); //Optional parameters
+                                            startActivity(myIntent);
+                                        } else {
+                                            Toast.makeText(SecondActivity.this, getString(R.string.email_not_verified), Toast.LENGTH_LONG).show();
+                                        }
                                     } else {
-                                        Toast.makeText(SecondActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SecondActivity.this, getString(R.string.account_not_found), Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
-
                 } else {
                     Toast.makeText(SecondActivity.this, "Enter your user and password", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
-            case R.id.mysignuptextview:
+            case R.id.mysignupbutton:
                 Log.d("GoodFood", "onClick mysignuptextview executed");
                 mAuth = FirebaseAuth.getInstance();
                 myIntent = new Intent(this, Login.class);
-                if (myname.getText().toString() != null && !myname.getText().toString().isEmpty() && mypassword.getText().toString() != null && !mypassword.getText().toString().isEmpty()) {
+                myname.getText().toString();
+                if (!myname.getText().toString().isEmpty() && mypassword.getText().toString() != null && !mypassword.getText().toString().isEmpty()) {
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(myname.getText().toString(), mypassword.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                myIntent.putExtra("myname", myname.getText().toString()); //Optional parameters
-                                myIntent.putExtra("mypassword", mypassword.getText().toString()); //Optional parameters
-                                startActivity(myIntent);
+                                currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(SecondActivity.this,getString(R.string.email_verification_sent),Toast.LENGTH_LONG).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(SecondActivity.this,getString(R.string.email_verification_failure),Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
                             } else {
-                                Toast.makeText(SecondActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SecondActivity.this,getString(R.string.registration_failure),Toast.LENGTH_LONG).show();
 
                             }
                         }
