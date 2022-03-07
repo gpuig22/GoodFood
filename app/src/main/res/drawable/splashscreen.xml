@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/cardview_light_background" />
+    <item android:drawable="@color/bluefirebase" />
     <item
-            android:drawable="@drawable/logofirebase"
+            android:drawable="@drawable/logo_built_knockout"
             android:gravity="center"
-            android:tileMode="disabled" />
-
-
-
+            android:tileMode="disabled"
+             />
 </layer-list>
