@@ -1,16 +1,15 @@
 package com.multimediatgna.goodfood;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.multimediatgna.goodfood.ui.main.LoginFragment;
 
@@ -32,7 +31,11 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(this, "Item 1 selected", Toast.LENGTH_SHORT).show();
                 return true;
             case  R.id.item2:
-                Toast.makeText(this, "Item 2 selected", Toast.LENGTH_SHORT).show();
+                Fragment mFragment = null;
+                mFragment = new DatabaseReadFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.myframelayout, mFragment).commit();
+                //Toast.makeText(this, "Item 2 selected", Toast.LENGTH_SHORT).show();
                 return true;
             case  R.id.item3:
                 Toast.makeText(this, "Item 3 selected", Toast.LENGTH_SHORT).show();

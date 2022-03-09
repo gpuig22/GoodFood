@@ -27,6 +27,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.multimediatgna.goodfood.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
@@ -69,6 +74,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         myfab = root.findViewById(R.id.myfab);
         myfab.setOnClickListener(this);
         mydb = new com.multimediatgna.goodfood.ui.main.FirestoreDb();
+
+        DateFormat dateformatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat timeformatter = new SimpleDateFormat("hh:mm:ss a");
+        Date today = new Date();
+        Date todayWithZeroTime = null;
+        Date todayTime = null;
+        try {
+            todayWithZeroTime = dateformatter.parse(dateformatter.format(today));
+            todayTime = timeformatter.parse(timeformatter.format(today));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mydb.saveDocument(mynameedittext.getText().toString(),todayWithZeroTime.toString(),todayTime.toString());
         return root;
     }
 
@@ -134,7 +152,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         + Build_ID + "\n \n"
                         + Build_Time + "\n \n"
                         + Fingerprint);
-                mydb.saveDocument$GoodFood_app(mynameedittext.getText().toString(),Model_value,Manufacturer_value);
 
                 break;
 
