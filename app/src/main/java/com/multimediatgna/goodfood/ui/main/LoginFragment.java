@@ -1,9 +1,5 @@
 package com.multimediatgna.goodfood.ui.main;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -25,10 +16,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.multimediatgna.goodfood.Login;
 import com.multimediatgna.goodfood.R;
+
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
@@ -38,6 +36,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private Context mycontext;
     Button mybutton, mybutton2;
     FloatingActionButton myfab;
+    FirestoreDb mydb;
+
 
 
     public static LoginFragment newInstance() {
@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mybutton2.setOnClickListener(this);
         myfab = root.findViewById(R.id.myfab);
         myfab.setOnClickListener(this);
-
+        mydb = new com.multimediatgna.goodfood.ui.main.FirestoreDb();
         return root;
     }
 
@@ -134,6 +134,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         + Build_ID + "\n \n"
                         + Build_Time + "\n \n"
                         + Fingerprint);
+                mydb.saveDocument$GoodFood_app(mynameedittext.getText().toString(),Model_value,Manufacturer_value);
 
                 break;
 

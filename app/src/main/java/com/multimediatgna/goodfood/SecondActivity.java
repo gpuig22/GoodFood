@@ -28,7 +28,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     Intent myIntent;
     TextView mysignuptextview;
-
     FirebaseUser currentUser;
 
     @Override
@@ -50,7 +49,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         mypassword = findViewById(R.id.mypassword);
         mysignuptextview = findViewById(R.id.mysignupbutton);
         mysignuptextview.setOnClickListener(this);
-
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
