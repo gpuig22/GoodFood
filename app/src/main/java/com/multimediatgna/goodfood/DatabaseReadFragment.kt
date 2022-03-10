@@ -32,7 +32,7 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
 
     private var mybutton: Button? = null
     private var mytextviewdate: TextView?= null
-    private var mytextviewhour: TextView?= null
+    private var myusername: TextView?= null
     var mydb: FirestoreDb? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,9 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
+        mydb = FirestoreDb()
+        mAuth = FirebaseAuth.getInstance()
+        currentUser = mAuth!!.getCurrentUser()
     }
 
     override fun onCreateView(
@@ -49,13 +51,12 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val myview = inflater.inflate(R.layout.fragment_database_read, container, false)
-        mybutton = myview.findViewById<Button>(R.id.myfirestonebutton)
-        mytextviewdate = myview.findViewById<TextView>(R.id.mydatetextview)
-        mytextviewhour = myview.findViewById<TextView>(R.id.myhourtextview2)
-        mybutton!!.setOnClickListener(this)
-        mydb = FirestoreDb()
-        mAuth = FirebaseAuth.getInstance()
-        currentUser = mAuth!!.getCurrentUser()
+        mytextviewdate = myview.findViewById<TextView>(R.id.mylastconnectiontextview)
+        myusername = myview.findViewById<TextView>(R.id.myusertextview2)
+        val intent = requireActivity().intent
+        mydb!!.getUltimoDiaConexion(intent.getStringExtra("myname").toString())
+        mytextviewdate!!.text = FirestoreDb.myfecha
+        myusername!!.text = intent.getStringExtra("myname").toString()
         return myview
 
     }
@@ -82,11 +83,7 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
 
-        val intent = requireActivity().intent
-        mydb!!.getUltimoDiaConexion(intent.getStringExtra("myname").toString())
-        mydb?.getUltimaHoraConexion(intent.getStringExtra("myname").toString())
-        mytextviewdate!!.text = FirestoreDb.myfecha
-        mytextviewhour!!.text = FirestoreDb.myhora
+
 
     }
 

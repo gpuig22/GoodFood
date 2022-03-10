@@ -27,10 +27,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.multimediatgna.goodfood.R;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -73,20 +72,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mybutton2.setOnClickListener(this);
         myfab = root.findViewById(R.id.myfab);
         myfab.setOnClickListener(this);
-        mydb = new com.multimediatgna.goodfood.ui.main.FirestoreDb();
+        mydb = new FirestoreDb();
 
-        DateFormat dateformatter = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat timeformatter = new SimpleDateFormat("hh:mm:ss a");
-        Date today = new Date();
-        Date todayWithZeroTime = null;
-        Date todayTime = null;
-        try {
-            todayWithZeroTime = dateformatter.parse(dateformatter.format(today));
-            todayTime = timeformatter.parse(timeformatter.format(today));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        mydb.saveDocument(mynameedittext.getText().toString(),todayWithZeroTime.toString(),todayTime.toString());
+        SimpleDateFormat formateador = new SimpleDateFormat(
+                "dd 'de' MMMM 'de' yyyy", new Locale("es_ES"));
+        Date fechaDate = new Date();
+        String fecha = formateador.format(fechaDate);
+        mydb.saveDocument(mynameedittext.getText().toString(), fecha != null ? fecha : null);
         return root;
     }
 
