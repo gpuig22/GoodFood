@@ -1,6 +1,7 @@
 package com.multimediatgna.goodfood;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,16 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.multimediatgna.goodfood.ui.main.LoginFragment;
+import com.multimediatgna.goodfood.ui.main.MainViewModel;
 
 public class Login extends AppCompatActivity {
 
+
+    private MainViewModel mViewModel;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater myinflater = getMenuInflater();
         myinflater.inflate(R.menu.main_fragment_menu, menu);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        Log.d("GoodFood","Login.java - Usuario: " + mViewModel.getMycurrentuser() + "/ Password: " +  mViewModel.getMycurrentpassword());
         return true;
     }
 
@@ -28,6 +35,7 @@ public class Login extends AppCompatActivity {
 
         switch (item.getItemId()){
             case  R.id.item1:
+
                 Fragment mFragment = null;
                 mFragment = new DatabaseReadFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();

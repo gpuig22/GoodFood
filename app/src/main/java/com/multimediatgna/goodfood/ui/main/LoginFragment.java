@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +17,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.multimediatgna.goodfood.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -61,31 +53,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         View root = inflater.inflate(R.layout.main_fragment, container, false);
         Intent intent = getActivity().getIntent();
-        mynameedittext = root.findViewById(R.id.myusername);
-        mypasswdedittext = root.findViewById(R.id.mypasswd);
-        mynameedittext.setText(intent.getStringExtra("myname"));
-        mypasswdedittext.setText(intent.getStringExtra("mypassword"));
-        mytextview = root.findViewById(R.id.mysysteminfo);
-        mybutton = root.findViewById(R.id.mysysteminfobutton);
-        mybutton.setOnClickListener(this);
-        mybutton2 = root.findViewById(R.id.myphonecallbutton);
-        mybutton2.setOnClickListener(this);
         myfab = root.findViewById(R.id.myfab);
         myfab.setOnClickListener(this);
-        mydb = new FirestoreDb();
-
-        SimpleDateFormat formateador = new SimpleDateFormat(
-                "dd 'de' MMMM 'de' yyyy", new Locale("es_ES"));
-        Date fechaDate = new Date();
-        String fecha = formateador.format(fechaDate);
-        mydb.saveDocument(mynameedittext.getText().toString(), fecha != null ? fecha : null);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        Log.d("GoodFood","LoginFragment.java - Usuario: " + mViewModel.getMycurrentuser() + "/ Password: " +  mViewModel.getMycurrentpassword());
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+
         // TODO: Use the ViewModel
     }
 
@@ -93,7 +72,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         switch (view.getId()) {
-
+            /*
             case R.id.mysysteminfobutton:
                 if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_PHONE_STATE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -145,9 +124,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         + Build_Time + "\n \n"
                         + Fingerprint);
 
-                break;
+                break;   */
 
-            case R.id.myphonecallbutton:
+            case R.id.myfab:
+
                 Intent myphoneCallIntent = new Intent(Intent.ACTION_CALL);
                 myphoneCallIntent.setData(Uri.parse(getString(R.string.callNumber)));
                 if (ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -155,12 +135,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 startActivity(myphoneCallIntent);
-                break;
 
-            case R.id.myfab:
-                    FirebaseAuth.getInstance().signOut();
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(1);
                 break;
 
         }

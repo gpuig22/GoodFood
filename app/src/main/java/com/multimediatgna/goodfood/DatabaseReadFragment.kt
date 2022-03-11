@@ -8,17 +8,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.multimediatgna.goodfood.ui.main.FirestoreDb
+import com.multimediatgna.goodfood.ui.main.MainViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-var mAuth: FirebaseAuth? = null
-var currentUser: FirebaseUser? = null
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +29,8 @@ var currentUser: FirebaseUser? = null
  * create an instance of this fragment.
  */
 class DatabaseReadFragment : Fragment(), View.OnClickListener {
-    // TODO: Rename and change types of parameters
+
+    var mAuth: FirebaseAuth? = null
     private var param1: String? = null
     private var param2: String? = null
 
@@ -34,6 +38,8 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
     private var mytextviewdate: TextView?= null
     private var myusername: TextView?= null
     var mydb: FirestoreDb? = null
+    private var mViewModel: MainViewModel? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,12 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
         }
         mydb = FirestoreDb()
         mAuth = FirebaseAuth.getInstance()
-        currentUser = mAuth!!.getCurrentUser()
+        mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        Log.d(
+            "GoodFood",
+            "DatabaseReadFragment.kt - Usuario: " + mViewModel!!.mycurrentuser + "/ Password: " + mViewModel!!.mycurrentpassword
+        )
+
     }
 
     override fun onCreateView(
@@ -52,11 +63,10 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
     ): View? {
         val myview = inflater.inflate(R.layout.fragment_database_read, container, false)
         mytextviewdate = myview.findViewById<TextView>(R.id.mylastconnectiontextview)
-        myusername = myview.findViewById<TextView>(R.id.myusertextview2)
-        val intent = requireActivity().intent
-        mydb!!.getUltimoDiaConexion(intent.getStringExtra("myname").toString())
+        myusername =myview.findViewById<TextView>(R.id.myusertextview2)
+        myusername?.setText(mViewModel!!.mycurrentuser)
+        mydb!!.getUltimoDiaConexion(mViewModel!!.mycurrentuser)
         mytextviewdate!!.text = FirestoreDb.myfecha
-        myusername!!.text = intent.getStringExtra("myname").toString()
         return myview
 
     }
@@ -83,7 +93,20 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
 
+        mydb = FirestoreDb()
+        val formateador = SimpleDateFormat(
+            "dd 'de' MMMM 'de' yyyy '-' hh:MM:ss", Locale("es_ES")
+        )
+        val fechaDate = Date()
+        val fecha = formateador.format(fechaDate)
+        mydb!!.saveDocument(
+            mViewModel!!.mycurrentuser,
+            (if (fecha != null) fecha else null)!!
+        )
 
+        FirebaseAuth.getInstance().signOut();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
 
     }
 
