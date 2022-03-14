@@ -2,7 +2,6 @@ package com.multimediatgna.goodfood;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,7 +70,10 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                                         if (currentUser.isEmailVerified()) {
                                             mViewModel.setMycurrentuser(myname.getText().toString());
                                             mViewModel.setMycurrentpassword(mypassword.getText().toString());
-                                            Log.d("GoodFood","SecondActivity.java - Usuario: " + mViewModel.getMycurrentuser() + "/ Password: " +  mViewModel.getMycurrentpassword());
+                                            Bundle b = new Bundle();
+                                            b.putString("username", myname.getText().toString());
+                                            b.putString("password", mypassword.getText().toString());
+                                            myIntent.putExtras(b); //Put your id to your next Intent
                                             startActivity(myIntent);
                                         } else {
                                             Toast.makeText(SecondActivity.this, getString(R.string.email_not_verified), Toast.LENGTH_LONG).show();

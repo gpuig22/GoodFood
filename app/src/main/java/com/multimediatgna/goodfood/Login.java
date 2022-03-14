@@ -1,7 +1,6 @@
 package com.multimediatgna.goodfood;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +17,6 @@ import com.multimediatgna.goodfood.ui.main.MainViewModel;
 
 public class Login extends AppCompatActivity {
 
-
     private MainViewModel mViewModel;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -26,7 +24,11 @@ public class Login extends AppCompatActivity {
         MenuInflater myinflater = getMenuInflater();
         myinflater.inflate(R.menu.main_fragment_menu, menu);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        Log.d("GoodFood","Login.java - Usuario: " + mViewModel.getMycurrentuser() + "/ Password: " +  mViewModel.getMycurrentpassword());
+        Bundle b = getIntent().getExtras();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if(b != null)
+            mViewModel.setMycurrentuser(b.getString("username"));
+            mViewModel.setMycurrentpassword(b.getString("password"));
         return true;
     }
 

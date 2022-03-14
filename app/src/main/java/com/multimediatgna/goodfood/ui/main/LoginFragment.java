@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,17 +55,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         myfab = root.findViewById(R.id.myfab);
         myfab.setOnClickListener(this);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        Log.d("GoodFood","LoginFragment.java - Usuario: " + mViewModel.getMycurrentuser() + "/ Password: " +  mViewModel.getMycurrentpassword());
         return root;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-
-        // TODO: Use the ViewModel
-    }
 
     @Override
     public void onClick(View view) {
@@ -127,7 +119,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 break;   */
 
             case R.id.myfab:
-
                 Intent myphoneCallIntent = new Intent(Intent.ACTION_CALL);
                 myphoneCallIntent.setData(Uri.parse(getString(R.string.callNumber)));
                 if (ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {

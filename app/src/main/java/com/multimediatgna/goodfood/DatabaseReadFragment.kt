@@ -1,7 +1,6 @@
 package com.multimediatgna.goodfood
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.multimediatgna.goodfood.ui.main.FirestoreDb
 import com.multimediatgna.goodfood.ui.main.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +34,7 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var mybutton: Button? = null
+    private lateinit var mybutton: Button
     private var mytextviewdate: TextView?= null
     private var myusername: TextView?= null
     var mydb: FirestoreDb? = null
@@ -49,11 +49,7 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
         }
         mydb = FirestoreDb()
         mAuth = FirebaseAuth.getInstance()
-        mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        Log.d(
-            "GoodFood",
-            "DatabaseReadFragment.kt - Usuario: " + mViewModel!!.mycurrentuser + "/ Password: " + mViewModel!!.mycurrentpassword
-        )
+        mViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
     }
 
@@ -63,12 +59,13 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
     ): View? {
         val myview = inflater.inflate(R.layout.fragment_database_read, container, false)
         mytextviewdate = myview.findViewById<TextView>(R.id.mylastconnectiontextview)
+        mybutton = myview.findViewById<Button>(R.id.mybuttonclosesession)
+        mybutton.setOnClickListener(this)
         myusername =myview.findViewById<TextView>(R.id.myusertextview2)
         myusername?.setText(mViewModel!!.mycurrentuser)
         mydb!!.getUltimoDiaConexion(mViewModel!!.mycurrentuser)
         mytextviewdate!!.text = FirestoreDb.myfecha
         return myview
-
     }
 
     companion object {
@@ -99,10 +96,7 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
         )
         val fechaDate = Date()
         val fecha = formateador.format(fechaDate)
-        mydb!!.saveDocument(
-            mViewModel!!.mycurrentuser,
-            (if (fecha != null) fecha else null)!!
-        )
+        mydb!!.saveDocument(mViewModel!!.mycurrentuser, (if (fecha != null) fecha else null)!!)
 
         FirebaseAuth.getInstance().signOut();
         android.os.Process.killProcess(android.os.Process.myPid());

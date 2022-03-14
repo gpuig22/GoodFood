@@ -11,59 +11,75 @@
 
     <TextView
         android:id="@+id/mylastconnectiontextview"
-        android:layout_width="181dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="265dp"
+        android:layout_height="41dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
         android:fontFamily="@font/montserrat_alternates_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/myusertextview2"
-        app:layout_constraintVertical_bias="0.001" />
+        app:layout_constraintTop_toBottomOf="@+id/myusertextview2" />
 
     <TextView
         android:id="@+id/myusertextview2"
-        android:layout_width="181dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="266dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="52dp"
         android:fontFamily="@font/montserrat_alternates_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toEndOf="@+id/myusertextlabel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/myusertextlabel"
-        android:layout_width="67dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="129dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat_alternates_bold"
         android:text="Usuario"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="38dp" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="132dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat_alternates_bold"
         android:text="Última conexión"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myusertextlabel"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="38dp" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myusertextlabel" />
 
     <Button
         android:id="@+id/mybuttonclosesession"
-        android:layout_width="527dp"
-        android:layout_height="63dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="297dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="#F57C00"
         android:text="Close session"
+        android:textColor="#050505"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mylastconnectiontextview"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
         app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/purple_700"
+        android:backgroundTint="#F57C00"
+        app:layout_constraintTop_toBottomOf="@+id/mylastconnectiontextview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

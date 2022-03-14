@@ -4,11 +4,13 @@
     <item
         android:id="@+id/item4"
         android:icon="@android:drawable/ic_menu_rotate"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        />
     <item
         android:id="@+id/item1"
         android:icon="@drawable/user_icon_149329"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+         />
     <item android:id="@+id/item2"
         android:title="@string/item2"
         app:showAsAction="never"/>
