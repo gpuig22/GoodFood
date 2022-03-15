@@ -1,6 +1,7 @@
 package com.multimediatgna.goodfood
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,6 +66,13 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
         myusername?.setText(mViewModel!!.mycurrentuser)
         mydb!!.getUltimoDiaConexion(mViewModel!!.mycurrentuser)
         mytextviewdate!!.text = FirestoreDb.myfecha
+        mydb = FirestoreDb()
+        val formateador = SimpleDateFormat(
+            "dd 'de' MMMM 'de' yyyy '-' hh:MM:ss", Locale("es_ES")
+        )
+        val fechaDate = Date()
+        val fecha = formateador.format(fechaDate)
+        mydb!!.saveDocument(mViewModel!!.mycurrentuser, (if (fecha != null) fecha else null)!!)
         return myview
     }
 
@@ -89,15 +97,6 @@ class DatabaseReadFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-
-        mydb = FirestoreDb()
-        val formateador = SimpleDateFormat(
-            "dd 'de' MMMM 'de' yyyy '-' hh:MM:ss", Locale("es_ES")
-        )
-        val fechaDate = Date()
-        val fecha = formateador.format(fechaDate)
-        mydb!!.saveDocument(mViewModel!!.mycurrentuser, (if (fecha != null) fecha else null)!!)
-
         FirebaseAuth.getInstance().signOut();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);

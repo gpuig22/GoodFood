@@ -26,7 +26,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     Button myloginbutton;
     EditText myname;
     EditText mypassword;
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
     Intent myIntent;
     TextView mysignuptextview;
     FirebaseUser currentUser;
